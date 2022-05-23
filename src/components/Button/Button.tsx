@@ -3,5 +3,5 @@ import "./index.scss";
 type Props = {};
 
 export const Button = (props: Props) => {
-  return <button className="button">Button</button>;
+  return <button className="button">Connect Wallet</button>;
 };

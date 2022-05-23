@@ -5,6 +5,7 @@ import { DateTimePicker } from "./components/DateTimePicker/DateTime";
 import { Input } from "./components/Input/Input";
 import { Button } from "./components/Button/Button";
 import { ethers } from "ethers";
+import { ThemeProvider } from "styled-components";
 
 declare var window: any;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -46,30 +47,53 @@ function App() {
     recipient: "",
     timestamp: null,
   });
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
+  const lightTheme = {
+    body: "#FFF",
+    text: "#363537",
+    toggleBorder: "#FFF",
+    background: "#363537",
+    cardBackground: "white",
+    inputBg: " rgb(247, 248, 250)",
+  };
+  const darkTheme = {
+    body: "#363537",
+    text: "#FAFAFA",
+    toggleBorder: "#6B8096",
+    background: "#999",
+    inputBg: "rgb(44, 47, 54)",
+    cardBackground: "rgb(25, 27, 31)",
+  };
+  const toggleTheme = () => {
+    
+  };
   return (
-    <div className="swap">
-      <div className="swap__container">
-        <div className="swap__inner">
-          <div className="title">Transfer</div>
-          <DateTimePicker />
-          <Input
-            // onChange={(...prevState) => setFormState({ ...prevState })}
-            type="number"
-            placeholder="Enter the Amount"
-          />
-          <Input
-            // onChange={(...prevState) => setFormState()}
-            type="text"
-            placeholder="ENS Name or Wallet Address"
-          />
-          <div className="tag-container">
-            <div className="tag">@dgimbernat</div>
+    <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
+      <button onClick={() => setIsDarkTheme(!isDarkTheme)}>Toggle Theme</button>
+      <div className="swap">
+        <div className="swap__container">
+          <div className="swap__inner">
+            <div className="title">Scheduled Transfer</div>
+            <DateTimePicker />
+            <Input
+              // onChange={(...prevState) => setFormState({ ...prevState })}
+              type="number"
+              // placeholder="Enter the Amount"
+            />
+            <Input
+              // onChange={(...prevState) => setFormState()}
+              type="text"
+              placeholder="ENS Name or Wallet Address"
+            />
+            <div className="tag-container">
+              <div className="tag">@dgimbernat</div>
+            </div>
+            <Button />
           </div>
-          <Button />
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

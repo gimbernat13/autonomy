@@ -3,17 +3,16 @@ import styled from "styled-components";
 interface Props {}
 
 export const DateTimePicker = (props: Props) => {
-  const Button = styled.input`
+  const StyledPicker = styled.input`
     border-radius: 20px;
-    background-color: rgb(247, 248, 250);
-    width: initial;
+    /* background-color: rgb(247, 248, 250); */
     width: 100%;
     position: relative;
     border: 1px solid rgb(237, 238, 242);
     font-size: 20px;
     font-family: "Inter", sans-serif !important;
     color: rgb(86, 90, 105) !important;
-
+    background: ${({ theme }) => theme.inputBg};
 
     ::-webkit-datetime-edit {
       padding: 16px;
@@ -30,29 +29,30 @@ export const DateTimePicker = (props: Props) => {
       display: none;
     }
     ::-webkit-calendar-picker-indicator {
-      transform: scale(1.3);
+      /* transform: scale(1.3); */
       cursor: pointer;
-      /* margin-right: 16px; */
+      margin-right: 16px;
     }
-
-    /* The GitHub button is a primary button
-   * edit this to target it specifically! */
   `;
   const Container = styled.div`
-  width: 100%;
+    width: 100%;
     /* padding: 20px; */
     cursor: pointer;
   `;
 
+  const [value, setValue] = React.useState("2018-06-12T19:30");
+  const today = new Date().toISOString();
+  console.log(today);
   return (
     <Container>
-      <Button
+      <StyledPicker
         type="datetime-local"
         id="meeting-time"
+        onChange={(e) => setValue(e.target.value)}
         name="meeting-time"
-        value="2018-06-12T19:30"
-        min="2018-06-07T00:00"
-        max="2018-06-14T00:00"
+        value={value}
+        min={today}
+        max="2024-06-14T00:00"
       />
     </Container>
   );

@@ -6,6 +6,7 @@ import { Input } from "./components/Input/Input";
 import { Button } from "./components/Button/Button";
 import { ethers } from "ethers";
 import { ThemeProvider } from "styled-components";
+import { Card } from "./components/Card/Card";
 
 declare var window: any;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -51,29 +52,31 @@ function App() {
 
   const lightTheme = {
     body: "#FFF",
-    text: "#363537",
+    text: "#363537 !important",
     toggleBorder: "#FFF",
     background: "#363537",
-    cardBackground: "white",
+    cardBg: "white",
     inputBg: " rgb(247, 248, 250)",
+    buttonBg: " rgb(205, 230, 254)",
   };
   const darkTheme = {
     body: "#363537",
-    text: "#FAFAFA",
+    text: "#FAFAFA !important",
     toggleBorder: "#6B8096",
     background: "#999",
     inputBg: "rgb(44, 47, 54)",
-    cardBackground: "rgb(25, 27, 31)",
+    cardBg: "rgb(25, 27, 31)",
+    buttonBg: "rgba(21, 61, 111, 0.44)",
   };
-  const toggleTheme = () => {
-    
-  };
+
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
-      <button onClick={() => setIsDarkTheme(!isDarkTheme)}>Toggle Theme</button>
-      <div className="swap">
-        <div className="swap__container">
-          <div className="swap__inner">
+      <div className={isDarkTheme ? "light-theme" : "dark-theme"}>
+        <button onClick={() => setIsDarkTheme(!isDarkTheme)}>
+          Toggle Theme
+        </button>
+        <Card>
+          <>
             <div className="title">Scheduled Transfer</div>
             <DateTimePicker />
             <Input
@@ -86,12 +89,12 @@ function App() {
               type="text"
               placeholder="ENS Name or Wallet Address"
             />
-            <div className="tag-container">
+            {/* <div className="tag-container">
               <div className="tag">@dgimbernat</div>
-            </div>
+            </div> */}
             <Button />
-          </div>
-        </div>
+          </>
+        </Card>
       </div>
     </ThemeProvider>
   );

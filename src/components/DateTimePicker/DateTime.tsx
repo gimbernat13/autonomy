@@ -8,11 +8,12 @@ export const DateTimePicker = (props: Props) => {
     /* background-color: rgb(247, 248, 250); */
     width: 100%;
     position: relative;
-    border: 1px solid rgb(237, 238, 242);
+    border: none;
     font-size: 20px;
     font-family: "Inter", sans-serif !important;
     color: rgb(86, 90, 105) !important;
     background: ${({ theme }) => theme.inputBg};
+
 
     ::-webkit-datetime-edit {
       padding: 16px;
@@ -22,16 +23,18 @@ export const DateTimePicker = (props: Props) => {
       /* background: silver; */
     }
     ::-webkit-datetime-edit-text {
-      /* color: red; */
     }
 
     ::-webkit-inner-spin-button {
       display: none;
     }
     ::-webkit-calendar-picker-indicator {
+      color: white;
+      fill: white;
+      stroke: white;
       /* transform: scale(1.3); */
       cursor: pointer;
-      margin-right: 16px;
+      margin-right: 18px;
     }
   `;
   const Container = styled.div`

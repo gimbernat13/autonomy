@@ -5,22 +5,20 @@ interface Props {}
 export const DateTimePicker = (props: Props) => {
   const StyledPicker = styled.input`
     border-radius: 20px;
-    /* background-color: rgb(247, 248, 250); */
     width: 100%;
     position: relative;
     border: none;
     font-size: 20px;
-    font-family: "Inter", sans-serif !important;
-    color: rgb(86, 90, 105) !important;
     background: ${({ theme }) => theme.inputBg};
-
+    color-scheme: ${({ theme }) => theme.colorScheme};
+    font-size: 18px;
+    font-family: "Roboto Mono", monospace !important;
+    font-weight: 500;
 
     ::-webkit-datetime-edit {
       padding: 16px;
     }
     ::-webkit-datetime-edit-fields-wrapper {
-      /* padding: 0 1rem; */
-      /* background: silver; */
     }
     ::-webkit-datetime-edit-text {
     }
@@ -43,7 +41,7 @@ export const DateTimePicker = (props: Props) => {
     cursor: pointer;
   `;
 
-  const [value, setValue] = React.useState("2018-06-12T19:30");
+  const [dateValue, setDateValue] = React.useState("2018-06-12T19:30");
   const today = new Date().toISOString();
   console.log(today);
   return (
@@ -51,9 +49,9 @@ export const DateTimePicker = (props: Props) => {
       <StyledPicker
         type="datetime-local"
         id="meeting-time"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setDateValue(e.target.value)}
         name="meeting-time"
-        value={value}
+        value={dateValue}
         min={today}
         max="2024-06-14T00:00"
       />

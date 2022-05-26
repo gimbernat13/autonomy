@@ -1,10 +1,11 @@
 body {
   margin: 0;
-  font-family: "Inter", sans-serif !important;
+  // font-family: "Inter custom", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // background-color: rgb(251, 240, 247) !important;
-  background-color: rgb(44, 47, 54);
+  // background-color: rgb(44, 47, 54);
+  font-family: "Roboto Mono", monospace;
 }
 
 .light-theme {
@@ -14,9 +15,8 @@ body {
 .dark-theme {
   height: 100vh;
 
-  background-color:rgb(33, 36, 41) !important;
+  background-color: rgb(33, 36, 41) !important;
 }
-
 
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -26,7 +26,9 @@ input::-webkit-inner-spin-button {
 .title {
   font-weight: 500;
   font-size: 16px;
-  padding: 0.5rem;
+  padding: 1rem 1.25rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tag {
@@ -46,4 +48,13 @@ input::-webkit-inner-spin-button {
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
+}
+
+svg {
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: "Inter custom";
+  src: url("./assets/Inter-roman.var.woff2") format("woff2");
 }

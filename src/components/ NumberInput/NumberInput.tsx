@@ -15,25 +15,20 @@ const StyledInputContainer = styled.div`
   background: ${({ theme }) => theme.inputBg};
   border-radius: ${GLOBAL_THEME.borderRadius};
   padding: 16px;
-  font-weight: "bolder";
-  border: ${({ theme }) => theme.border};
-
   /* border: ${GLOBAL_THEME.border}; */
 
-  &:hover {
+  /* &:hover {
     border: 1px solid rgb(206, 208, 217);
   }
   &.focus {
     border: 1px solid rgb(206, 208, 217);
-  }
+  } */
 `;
 const StyledInput = styled.input`
-  font-family: "Roboto Mono", monospace !important;
-  font-size: 18px;
-
   border-radius: 20px;
   position: relative;
   font-weight: 500;
+  font-size: 18px;
   outline: none;
   border: none;
   flex: 1 1 auto;
@@ -43,23 +38,26 @@ const StyledInput = styled.input`
   text-overflow: ellipsis;
   width: 100%;
   color: ${({ theme }) => theme.text};
+  font-family: "Roboto Mono", monospace !important;
 `;
 
-export const Input = ({ placeholder, type }: Props) => {
-  const [value, setValue] = React.useState("");
+export const NumberInput = ({ placeholder, type }: Props) => {
   const [theme, setTheme] = useDarkMode();
 
+  const twoDecimals = (input: number) => {
+    return input.toFixed(2);
+  };
   return (
     <StyledInputContainer>
       <div className="input-flex-container">
         <StyledInput
-          value={value}
-          onChange={(e: any) => setValue(e.target.value)}
           step="0.01"
           placeholder={placeholder}
-          type={"text"}
+          type={type}
           className="amount-input"
+          defaultValue={twoDecimals(0)}
         />
+        <img className="logo" src={ethLogo} alt="" />
       </div>
     </StyledInputContainer>
   );

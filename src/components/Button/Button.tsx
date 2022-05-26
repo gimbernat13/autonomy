@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { JsxElement } from "typescript";
 import "./index.scss";
-type Props = {};
+type Props = {
+  onClick: () => void;
+  label?: "string";
+  children?: any;
+};
 const StyledButton = styled.button`
   padding: 16px;
   width: 100%;
@@ -27,11 +32,17 @@ const StyledButton = styled.button`
   transform: perspective(1px) translateZ(0px);
   background: ${({ theme }) => theme.buttonBg};
   color: rgb(80, 144, 234);
+  font-family: "Roboto Mono", monospace;
+
   /* background-color: rgb(205, 230, 254); */
   &:hover {
-    background-color: rgb(190, 222, 254);
+    filter: brightness(1.05);
   }
 `;
-export const Button = (props: Props) => {
-  return <StyledButton className="button">Connect Wallet</StyledButton>;
+export const Button = ({ onClick, label, children }: Props) => {
+  return (
+    <StyledButton onClick={onClick} className="button">
+      {children}
+    </StyledButton>
+  );
 };

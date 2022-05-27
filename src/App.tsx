@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
-import { DateTimePicker } from "./components/DateTimePicker/DateTime";
-import { Input } from "./components/Input/Input";
-import { Button } from "./components/Button/Button";
 import { ThemeProvider } from "styled-components";
-import { Card } from "./components/Card/Card";
 import { LightBulb } from "./components/LightBulb/LightBulb";
 import { Moon } from "./components/Moon/Moon";
-import { NumberInput } from "./components/ NumberInput/NumberInput";
 import Web3 from "web3";
-import Contract from "web3";
 import { darkTheme, lightTheme } from "./config/theme";
+import { MyForm } from "./components/TxForm/TxForm";
 
 declare var window: any;
 let provider = window.ethereum;
@@ -131,45 +126,17 @@ function App() {
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
       <div className={isDarkTheme ? "light-theme" : "dark-theme"}>
-        {/* <button >Niggaz love white pussy</button> */}
-
-        <Card>
-          <>
-            <div className="title">
-              <div>Scheduled Transfer</div>
-              {/* FIXME: CLEANUP  */}
-              {isDarkTheme ? (
-                <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
-              ) : (
-                <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
-              )}
-            </div>
-            <DateTimePicker />
-            <NumberInput
-              // onChange={(...prevState) => setFormState({ ...prevState })}
-              type="number"
-              placeholder="Enter the Amount"
-            />
-            <Input
-              // onChange={(...prevState) => setFormState()}
-              type="text"
-              placeholder="Wallet Address"
-            />
-            <div className="tag-container">
-              <div className="tag">@dgimbernat</div>
-            </div>
-            {isConnected ? (
-              <Button onClick={() => callReg()}> Send Transaction </Button>
-            ) : (
-              <Button onClick={onLoginHandler}>
-                <>
-                  {!isConnecting && !isConnected && "Connect Wallet"}
-                  {isConnecting && "Loading..."}
-                </>
-              </Button>
-            )}
-          </>
-        </Card>
+        {isDarkTheme ? (
+          <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
+        ) : (
+          <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
+        )}
+        <MyForm
+          isConnected={isConnected}
+          isConnecting={isConnecting}
+          message="Scheduled Transfer"
+          onLoginHandler={onLoginHandler}
+        />
       </div>
     </ThemeProvider>
   );

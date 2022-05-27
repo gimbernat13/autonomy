@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.scss";
-import ethLogo from "../../assets/eth-logo.png";
 import styled from "styled-components";
 import { useDarkMode } from "../../utils/hooks/useDarkmode";
 import { GLOBAL_THEME } from "../../utils/styleVariables";
@@ -9,6 +8,8 @@ type Props = {
   placeholder?: string;
   type: string;
   onChange?: () => void;
+  value: string;
+  id: string;
 };
 
 const StyledInputContainer = styled.div`
@@ -17,9 +18,7 @@ const StyledInputContainer = styled.div`
   padding: 16px;
   font-weight: "bolder";
   border: ${({ theme }) => theme.border};
-
   /* border: ${GLOBAL_THEME.border}; */
-
   &:hover {
     border: 1px solid rgb(206, 208, 217);
   }
@@ -30,7 +29,6 @@ const StyledInputContainer = styled.div`
 const StyledInput = styled.input`
   font-family: "Roboto Mono", monospace !important;
   font-size: 18px;
-
   border-radius: 20px;
   position: relative;
   font-weight: 500;
@@ -45,19 +43,18 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.text};
 `;
 
-export const Input = ({ placeholder, type }: Props) => {
-  const [value, setValue] = React.useState("");
+export const Input = ({ placeholder, type, onChange, value, id }: Props) => {
   const [theme, setTheme] = useDarkMode();
 
   return (
     <StyledInputContainer>
       <div className="input-flex-container">
         <StyledInput
-          value={value}
-          onChange={(e: any) => setValue(e.target.value)}
+          id={id}
+          onChange={onChange}
           step="0.01"
           placeholder={placeholder}
-          type={"text"}
+          type={type}
           className="amount-input"
         />
       </div>

@@ -12,7 +12,6 @@ const StyledCard = styled.div`
   background: rgb(255, 255, 255);
   background: ${({ theme }) => theme.cardBg};
   color: ${({ theme }) => theme.text};
-
   box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
     rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
   border-radius: 24px;

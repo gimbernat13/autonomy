@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { JsxElement } from "typescript";
 import "./index.scss";
 type Props = {
-  onClick: () => void;
+  onClick?: () => void;
   label?: "string";
   children?: any;
+  disabled?: boolean;
 };
 const StyledButton = styled.button`
   padding: 16px;
@@ -39,9 +39,14 @@ const StyledButton = styled.button`
     filter: brightness(1.05);
   }
 `;
-export const Button = ({ onClick, label, children }: Props) => {
+export const Button = ({ onClick, label, children, disabled }: Props) => {
   return (
-    <StyledButton onClick={onClick} className="button">
+    <StyledButton
+      disabled={disabled}
+      type="submit"
+      onClick={onClick}
+      className="button"
+    >
       {children}
     </StyledButton>
   );

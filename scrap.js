@@ -48,3 +48,44 @@ const newReqObject = {
   paywithAUTO: false,
   value: 2,
 };
+
+
+<Card>
+<>
+  <div className="title">
+    <div>Scheduled Transfer</div>
+    {/* FIXME: CLEANUP  */}
+    {isDarkTheme ? (
+      <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
+    ) : (
+      <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
+    )}
+  </div>
+  <DateTimePicker />
+  <NumberInput
+    // onChange={(...prevState) => setFormState({ ...prevState })}
+    type="number"
+    placeholder="Enter the Amount"
+  />
+  <Input
+    // onChange={(...prevState) => setFormState()}
+    type="text"
+    placeholder="Wallet Address"
+  />
+  <div className="tag-container">
+    <div className="tag">@dgimbernat</div>
+  </div>
+  {isConnected ? (
+    <Button onClick={() => callReg()}> Send Transaction </Button>
+  ) : (
+    <Button onClick={onLoginHandler}>
+      <>
+        {!isConnecting && !isConnected && "Connect Wallet"}
+        {isConnecting && !isConnected && "Loading..."}
+      </>
+    </Button>
+  )}
+
+  <MyForm message="niggas love white pussy "/>
+</>
+</Card>

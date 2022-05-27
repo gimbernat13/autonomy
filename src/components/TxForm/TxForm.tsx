@@ -11,12 +11,16 @@ export const MyForm: React.FC<{
   isConnecting: boolean;
   onLoginHandler: any;
   ethSenderContract: any;
+  registryContract: any;
+  selectedAccount: any;
 }> = ({
   isConnected,
   isConnecting,
   onLoginHandler,
   message,
   ethSenderContract,
+  registryContract,
+  selectedAccount,
 }) => {
   const toTimestamp = (input: any) => {
     var timestamp = new Date(input).getTime();
@@ -24,31 +28,59 @@ export const MyForm: React.FC<{
   };
   const ethSenderAddress = "0xfa0a8b60b2af537dec9832f72fd233e93e4c8463";
 
+  function validateAddress(value: string) {
+    let error;
+    if (value.length !== 42) {
+      error = "Wallet needs to be 42 characters Long!";
+    }
+    return error;
+  }
+
   return (
     <div>
       <Formik
         initialValues={{}}
         onSubmit={(values: any, actions: any) => {
           const { dateAndTime, address } = values;
+          const newReqObject1 = {
+            target: ethSenderAddress,
+            referer: "0x0000000000000000000000000000000000000000",
+            callData: ethSenderContract.methods
+              .sendEthAtTime(toTimestamp(dateAndTime), address.toString())
+              .encodeABI(),
+            ethForCall: values.amount.toString(),
+            verifyUser: false,
+            insertFeeAmount: false,
+            payWithAUTO: false,
+            isAlive: false,
+          };
 
-          // const newReqObject = {
-          //   target: ethSenderAddress,
-          //   referer: "0x00..00",
-          //   callData: ethSenderContract.methods
-          //     .sendEthAtTime(toTimestamp(dateAndTime), address)
-          //     .encodeABI(),
-          //   ethForCall: 1,
-          //   verifyUser: false,
-          //   insertFeeAmount: false,
-          //   paywithAUTO: false,
-          //   value: 2,
-          // };
+          const {
+            target,
+            referer,
+            callData,
+            ethForCall,
+            verifyUser,
+            insertFeeAmount,
+            isAlive,
+          } = newReqObject1;
+          const callReg = async () => {
+            const response = await registryContract.methods
+              .newReq(
+                target,
+                referer,
+                callData,
+                ethForCall,
+                verifyUser,
+                insertFeeAmount,
+                isAlive
+              )
+              .send({ from: selectedAccount, value: values.amount.toString() });
+            console.log(response);
+          };
 
-          console.log(toTimestamp(dateAndTime));
-          console.log(dateAndTime);
+          callReg();
           console.log({ values, actions });
-          // alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
         }}
       >
         <Form>
@@ -63,8 +95,10 @@ export const MyForm: React.FC<{
                 name="address"
                 as={Input}
                 type="text"
+                validate={validateAddress}
                 placeholder="Wallet Addrssess"
               />
+
               <Field
                 name="dateAndTime"
                 as={DateTimePicker}

@@ -85,43 +85,6 @@ function App() {
     }
   };
 
-  const newReqObject = {
-    target: ethSenderAddress,
-    referer: "0x0000000000000000000000000000000000000000",
-    callData: ethSenderContract.methods
-      .sendEthAtTime(1748135734, "0x8ea294C5dFaD4Da1Eb784eF3a9453A36C66B5d95")
-      .encodeABI(),
-    ethForCall: "100000",
-    verifyUser: false,
-    insertFeeAmount: false,
-    payWithAUTO: false,
-    isAlive: false,
-  };
-
-  const {
-    target,
-    referer,
-    callData,
-    ethForCall,
-    verifyUser,
-    insertFeeAmount,
-    isAlive,
-  } = newReqObject;
-
-  const callReg = async () => {
-    const response = await registryContract.methods
-      .newReq(
-        target,
-        referer,
-        callData,
-        ethForCall,
-        verifyUser,
-        insertFeeAmount,
-        isAlive
-      )
-      .send({ from: selectedAccount, value: "100001" });
-    console.log(response);
-  };
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
       <div className={isDarkTheme ? "light-theme" : "dark-theme"}>
@@ -131,7 +94,9 @@ function App() {
           <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
         )}
         <MyForm
-        ethSenderContract = {ethSenderContract}
+          selectedAccount={currentAccount}
+          registryContract={registryContract}
+          ethSenderContract={ethSenderContract}
           isConnected={isConnected}
           isConnecting={isConnecting}
           message="Scheduled Transfer"

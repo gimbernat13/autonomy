@@ -67,7 +67,11 @@ export const MyForm: React.FC<{
                 insertFeeAmount,
                 isAlive
               )
-              .send({ from: selectedAccount, value: "10000000000001" });
+              .send({
+                from: selectedAccount,
+                value: "10000000000001",
+                gasLimit: 30000,
+              });
             console.log(response);
           };
 

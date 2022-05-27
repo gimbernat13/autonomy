@@ -10,11 +10,19 @@ export const MyForm: React.FC<{
   isConnected: boolean;
   isConnecting: boolean;
   onLoginHandler: any;
-}> = ({ isConnected, isConnecting, onLoginHandler, message }) => {
+  ethSenderContract: any;
+}> = ({
+  isConnected,
+  isConnecting,
+  onLoginHandler,
+  message,
+  ethSenderContract,
+}) => {
   const toTimestamp = (input: any) => {
     var timestamp = new Date(input).getTime();
     return timestamp;
   };
+  const ethSenderAddress = "0xfa0a8b60b2af537dec9832f72fd233e93e4c8463";
 
   return (
     <div>
@@ -22,6 +30,20 @@ export const MyForm: React.FC<{
         initialValues={{}}
         onSubmit={(values: any, actions: any) => {
           const { dateAndTime, address } = values;
+
+          // const newReqObject = {
+          //   target: ethSenderAddress,
+          //   referer: "0x00..00",
+          //   callData: ethSenderContract.methods
+          //     .sendEthAtTime(toTimestamp(dateAndTime), address)
+          //     .encodeABI(),
+          //   ethForCall: 1,
+          //   verifyUser: false,
+          //   insertFeeAmount: false,
+          //   paywithAUTO: false,
+          //   value: 2,
+          // };
+
           console.log(toTimestamp(dateAndTime));
           console.log(dateAndTime);
           console.log({ values, actions });

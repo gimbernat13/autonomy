@@ -85,7 +85,6 @@ function App() {
     }
   };
 
-  console.log("reg contract", ethSenderContract);
   const newReqObject = {
     target: ethSenderAddress,
     referer: "0x0000000000000000000000000000000000000000",
@@ -132,6 +131,7 @@ function App() {
           <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
         )}
         <MyForm
+        ethSenderContract = {ethSenderContract}
           isConnected={isConnected}
           isConnecting={isConnecting}
           message="Scheduled Transfer"

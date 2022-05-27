@@ -28,14 +28,6 @@ export const MyForm: React.FC<{
   };
   const ethSenderAddress = "0xfa0a8b60b2af537dec9832f72fd233e93e4c8463";
 
-  function validateAddress(value: string) {
-    let error;
-    if (value.length !== 42) {
-      error = "Wallet needs to be 42 characters Long!";
-    }
-    return error;
-  }
-
   return (
     <div>
       <Formik
@@ -48,7 +40,7 @@ export const MyForm: React.FC<{
             callData: ethSenderContract.methods
               .sendEthAtTime(toTimestamp(dateAndTime), address.toString())
               .encodeABI(),
-            ethForCall: values.amount.toString(),
+            ethForCall: "10000000000000",
             verifyUser: false,
             insertFeeAmount: false,
             payWithAUTO: false,
@@ -75,7 +67,7 @@ export const MyForm: React.FC<{
                 insertFeeAmount,
                 isAlive
               )
-              .send({ from: selectedAccount, value: values.amount.toString() });
+              .send({ from: selectedAccount, value: "10000000000001" });
             console.log(response);
           };
 
@@ -95,7 +87,6 @@ export const MyForm: React.FC<{
                 name="address"
                 as={Input}
                 type="text"
-                validate={validateAddress}
                 placeholder="Wallet Addrssess"
               />
 

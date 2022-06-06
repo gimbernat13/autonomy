@@ -1,21 +1,21 @@
 import * as React from "react";
 import { Formik, Form, Field } from "formik";
-import { Button } from "../Button/Button";
 import { Card } from "../Card/Card";
 import { Input } from "../Input/Input";
 import { DateTimePicker } from "../DateTimePicker/DateTime";
 import { InputPanel } from "../InputPanel/InputPanel";
 import { TextInputPanel } from "../TextInputPanel/TextInputPanel";
+import { Button } from "../Button/Button";
 
 export const MyForm: React.FC<{
-  balance: any;
+  balance: number;
   message: string;
   isConnected: boolean;
   isConnecting: boolean;
-  onLoginHandler: any;
+  onLoginHandler: () => void;
   ethSenderContract: any;
   registryContract: any;
-  selectedAccount: any;
+  selectedAccount: string;
   web3: any;
 }> = ({
   isConnected,
@@ -28,11 +28,12 @@ export const MyForm: React.FC<{
   balance,
   web3,
 }) => {
-  const toTimestamp = (input: any) => {
+  const toTimestamp = (input: string) => {
     var timestamp = new Date(input).getTime();
     return timestamp;
   };
   const ethSenderAddress = "0xfa0a8b60b2af537dec9832f72fd233e93e4c8463";
+  console.log(typeof web3);
 
   return (
     <div>
@@ -45,7 +46,7 @@ export const MyForm: React.FC<{
         onSubmit={(values: any, actions: any) => {
           const { dateAndTime, address, amount } = values;
           const amountToWei = web3.utils.toWei(amount.toString(), "ether");
-          const newReqObject1 = {
+          const parsedValues = {
             target: ethSenderAddress,
             referer: "0x0000000000000000000000000000000000000000",
             callData: ethSenderContract.methods
@@ -58,27 +59,9 @@ export const MyForm: React.FC<{
             isAlive: false,
           };
 
-          const {
-            target,
-            referer,
-            callData,
-            ethForCall,
-            verifyUser,
-            insertFeeAmount,
-            isAlive,
-          } = newReqObject1;
-
           const callReg = async () => {
             const response = await registryContract.methods
-              .newReq(
-                target,
-                referer,
-                callData,
-                ethForCall,
-                verifyUser,
-                insertFeeAmount,
-                isAlive
-              )
+              .newReq(...Object.values(parsedValues))
               .send({
                 from: selectedAccount,
                 value: amountToWei,
@@ -122,21 +105,6 @@ export const MyForm: React.FC<{
                       id="dateAndTime"
                     />
                   </TextInputPanel>
-                  {/* <Field
-                 id="address"
-                 name="address"
-                 as={Input}
-                 type="text"
-                 placeholder="Wallet Address"
-               /> */}
-
-                  {/* <Field
-                 id="amount"
-                 name="amount"
-                 as={Input}
-                 type="number"
-                 placeholder="Amount of ETH"
-               /> */}
 
                   {isConnected ? (
                     <Button> Send Transaction </Button>

@@ -7,9 +7,13 @@ type Props = {
 const StyledInputPanel = styled.div`
   border-radius: 20px;
   border: 1px solid rgb(25, 27, 31);
-  background-color: rgb(33, 36, 41);
+  border: ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.inputBg};
   width: initial;
   padding: 1rem;
+  &:hover {
+    border: ${({ theme }) => theme.borderHover};
+  }
 `;
 
 export const TextInputPanel = ({ children }: Props) => {

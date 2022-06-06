@@ -32,6 +32,14 @@ const StyledButton = styled.button`
   transform: perspective(1px) translateZ(0px);
   background: ${({ theme }) => theme.buttonBg};
   color: rgb(80, 144, 234);
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
+    filter: blur(1px);
+  }
 
   /* background-color: rgb(205, 230, 254); */
   &:hover {
@@ -41,7 +49,7 @@ const StyledButton = styled.button`
 export const Button = ({ onClick, label, children, disabled }: Props) => {
   return (
     <StyledButton
-      disabled={disabled}
+      disabled={false}
       type="submit"
       onClick={onClick}
       className="button"

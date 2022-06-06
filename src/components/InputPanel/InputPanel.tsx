@@ -3,13 +3,20 @@ import React from "react";
 import styled from "styled-components";
 import { Input } from "../Input/Input";
 
-type Props = {};
+type Props = {
+  balance: any;
+  handleMaxInput: any;
+  value: any;
+};
 const StyledInputPanel = styled.div`
   border-radius: 20px;
-  border: 1px solid rgb(25, 27, 31);
-  background-color: rgb(33, 36, 41);
+  background: ${({ theme }) => theme.inputBg};
   width: initial;
+  border: ${({ theme }) => theme.border};
   padding: 1rem;
+  &:hover {
+    border: ${({ theme }) => theme.borderHover};
+  }
 `;
 const StyledTopPanel = styled.div`
   display: flex;
@@ -35,25 +42,34 @@ const StyledMaxButton = styled.div`
   border: none;
   border-radius: 12px;
   color: rgb(33, 114, 229);
-  cursor: pointer;
   font-size: 11px;
   font-weight: 500;
   margin-left: 0.25rem;
   opacity: 1;
   padding: 4px 6px;
   pointer-events: initial;
+  cursor: pointer;
 `;
 
-export const InputPanel = (props: Props) => {
+export const InputPanel = ({ balance, value, handleMaxInput }: Props) => {
+  console.log("value is ", value);
   return (
     <StyledInputPanel>
       <StyledTopPanel>
-        <Field name="amount" as={Input} placeholder="Amount" id="amount" />{" "}
+        <Field
+          name="amount"
+          as={Input}
+          placeholder="Amount"
+          type="number"
+          id="amount"
+          value={value}
+        />
         <div>ETH</div>
       </StyledTopPanel>
       <StyledBottomPanel>
         <StyledBottomPanelText>
-          Balance : 5045<StyledMaxButton>MAX</StyledMaxButton>
+          Balance : {balance}
+          <StyledMaxButton onClick={handleMaxInput}>MAX</StyledMaxButton>
         </StyledBottomPanelText>
       </StyledBottomPanel>
     </StyledInputPanel>

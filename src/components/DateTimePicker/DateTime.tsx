@@ -30,7 +30,7 @@ const StyledPicker = styled.input`
     stroke: white;
     /* transform: scale(1.3); */
     cursor: pointer;
-    margin-right: 18px;
+    /* margin-right: 18px; */
   }
 `;
 const Container = styled.div`

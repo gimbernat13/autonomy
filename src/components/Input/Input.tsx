@@ -53,6 +53,7 @@ export const Input = ({ placeholder, type, onChange, value, id }: Props) => {
           step="0.01"
           placeholder={placeholder}
           type={type}
+          value={value ? value : ""}
           className="amount-input"
         />
       </div>

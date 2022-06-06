@@ -111,14 +111,13 @@ function App() {
 
   const StyledNav = styled("div")`
     width: 98%;
-    margin: auto;
+    margin: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   `;
   const StyledLogo = styled("img")`
     height: 40px;
-    padding: 1rem;
   `;
   const StyledRightSidePanel = styled("div")`
     display: flex;
@@ -153,6 +152,7 @@ function App() {
             alt=""
           />
           <StyledRightSidePanel>
+            <StyledSelector> {balance} ETH</StyledSelector>
             <StyledSelector> {chainIds[currentChain]}</StyledSelector>
             <StyledSelector> {currentAccount}</StyledSelector>
             <StyledSelector>{themeSwitcher}</StyledSelector>
@@ -162,6 +162,8 @@ function App() {
         </StyledNav>
 
         <MyForm
+          web3={web3}
+          balance={balance}
           selectedAccount={currentAccount}
           registryContract={registryContract}
           ethSenderContract={ethSenderContract}

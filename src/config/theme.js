@@ -7,7 +7,7 @@ export const lightTheme = {
   inputBg: " rgb(247, 248, 250)",
   buttonBg: " rgb(205, 230, 254)",
   colorScheme: "light",
-  border: "1px solid rgb(44, 47, 54)",
+  border: "1px solid rgb(44, 47, 54, .1)",
 };
 export const darkTheme = {
   body: "#363537",

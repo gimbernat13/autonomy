@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { LightBulb } from "./components/LightBulb/LightBulb";
 import { Moon } from "./components/Moon/Moon";
 import Web3 from "web3";
@@ -30,10 +30,28 @@ function App() {
   const [balance, setBalance] = useState<any>(0);
 
   const [isConnecting, setIsConnecting] = useState(false);
+  const currentChain = window.ethereum.networkVersion;
 
   useEffect(() => {
     detectProvider();
   }, []);
+
+  console.log(window.ethereum.networkVersion, "window.ethereum.networkVersion");
+
+  const chainIds: { [key: number]: string } = {
+    1: "Ethereum",
+    2: "R",
+    3: "Ropsten Testnet",
+  };
+
+  console.log("ccaca ", Object.keys(chainIds[1]));
+
+  const checkConnectedNetwork = () => {
+    if (currentChain != 3) {
+      return `⚠️ You are connected to ${chainIds[currentChain]}, Please Switch to Ropsten Network`;
+    }
+    return;
+  };
 
   const detectProvider = () => {
     let provider;
@@ -66,8 +84,6 @@ function App() {
     onLogin(provider);
   };
 
-  let selectedAccount = "";
-
   const onLogin = async (provider: any) => {
     const web3 = new Web3(provider);
     const accounts = await web3.eth.getAccounts();
@@ -85,14 +101,66 @@ function App() {
     }
   };
 
+  const themeSwitcher = isDarkTheme ? (
+    <div>
+      <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
+    </div>
+  ) : (
+    <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
+  );
+
+  const StyledNav = styled("div")`
+    width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `;
+  const StyledLogo = styled("img")`
+    height: 40px;
+    padding: 1rem;
+  `;
+  const StyledRightSidePanel = styled("div")`
+    display: flex;
+    align-items: center;
+  `;
+  const StyledSelector = styled("div")`
+    -webkit-box-align: center;
+    align-items: center;
+    background: ${({ theme }) => theme.cardBg};
+    border: ${({ theme }) => theme.border};
+    border-radius: 16px;
+    color: ${({ theme }) => theme.text};
+    cursor: pointer;
+    display: flex;
+    font-weight: 500;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 6px 8px;
+    max-width: 200px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+  `;
+
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
       <div className={isDarkTheme ? "light-theme" : "dark-theme"}>
-        {isDarkTheme ? (
-          <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
-        ) : (
-          <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
-        )}
+        <StyledNav>
+          <StyledLogo
+            src="https://uploads-ssl.webflow.com/623d3c9e548e1a3b4dc0d912/623d3c9e548e1a4624c0d9e1_autonomy-network-logo-mark-white.svg"
+            alt=""
+          />
+          <StyledRightSidePanel>
+            <StyledSelector> {chainIds[currentChain]}</StyledSelector>
+            <StyledSelector> {currentAccount}</StyledSelector>
+            <StyledSelector>{themeSwitcher}</StyledSelector>
+          </StyledRightSidePanel>
+
+          {/* <h3>{checkConnectedNetwork()}</h3> */}
+        </StyledNav>
+
         <MyForm
           selectedAccount={currentAccount}
           registryContract={registryContract}

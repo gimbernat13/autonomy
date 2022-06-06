@@ -11,11 +11,21 @@ body {
 .light-theme {
   height: 100vh;
   background-color: rgb(251, 240, 247);
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(252, 7, 125, 0.063) 0px,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 .dark-theme {
   height: 100vh;
 
   background-color: rgb(33, 36, 41) !important;
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(252, 7, 125, 0.063) 0px,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 input::-webkit-inner-spin-button {

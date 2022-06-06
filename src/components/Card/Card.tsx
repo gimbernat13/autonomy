@@ -17,6 +17,7 @@ const StyledCard = styled.div`
   border-radius: 24px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 5rem;
   z-index: 1;
 `;
 const StyledCardInner = styled.div`

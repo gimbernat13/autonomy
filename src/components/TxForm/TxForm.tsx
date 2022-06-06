@@ -91,7 +91,7 @@ export const MyForm: React.FC<{
                 name="address"
                 as={Input}
                 type="text"
-                placeholder="Wallet Addrssess"
+                placeholder="Wallet Address"
               />
 
               <Field

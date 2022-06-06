@@ -11,7 +11,7 @@ const StyledPicker = styled.input`
   border-radius: 20px;
   width: 100%;
   position: relative;
-  border: none;
+  border: ${({ theme }) => theme.border};
   font-size: 20px;
   background: ${({ theme }) => theme.inputBg};
   color-scheme: ${({ theme }) => theme.colorScheme};

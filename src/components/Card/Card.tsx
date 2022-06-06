@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { GLOBAL_THEME } from "../../utils/styleVariables";
 
 type Props = {
   children: JSX.Element;

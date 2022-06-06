@@ -1,7 +1,8 @@
 import React from "react";
 import "./index.scss";
 import styled from "styled-components";
-import { useDarkMode } from "../../utils/hooks/useDarkmode";
+// FIXME : USE HOOK TO HANDLE DARK MODE
+// import { useDarkMode } from "../../utils/hooks/useDarkmode";
 import { GLOBAL_THEME } from "../../utils/styleVariables";
 
 type Props = {
@@ -13,13 +14,9 @@ type Props = {
 };
 
 const StyledInputContainer = styled.div`
-  /* background: ${({ theme }) => theme.inputBg}; */
   border-radius: ${GLOBAL_THEME.borderRadius};
   font-weight: "bolder";
-  /* border: ${({ theme }) => theme.border}; */
-  /* border: ${GLOBAL_THEME.border}; */
   &:hover {
-    /* border: 1px solid rgb(206, 208, 217); */
   }
   &.focus {
     border: 1px solid rgb(206, 208, 217);
@@ -42,8 +39,6 @@ const StyledInput = styled.input`
 `;
 
 export const Input = ({ placeholder, type, onChange, value, id }: Props) => {
-  const [theme, setTheme] = useDarkMode();
-
   return (
     <StyledInputContainer>
       <div className="input-flex-container">

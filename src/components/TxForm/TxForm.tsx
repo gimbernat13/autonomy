@@ -83,17 +83,14 @@ export const MyForm: React.FC<{
                 from: selectedAccount,
                 value: amountToWei,
               });
-            console.log(response);
+            return response;
           };
 
           callReg();
-          console.log({ values, actions });
         }}
       >
         {({ setFieldValue, values, initialValues }) => {
-          console.log("values are ", values);
           const handleMaxInput = () => {
-            console.log("maax input ");
             setFieldValue("amount", balance);
           };
 

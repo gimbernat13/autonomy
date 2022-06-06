@@ -24,6 +24,40 @@ const ethSenderContract = new web3.eth.Contract(
 
 const registryContract = new web3.eth.Contract(REGISTRY_ABI, registryAddress);
 
+const StyledNav = styled("div")`
+  width: 98%;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const StyledLogo = styled("img")`
+  height: 40px;
+`;
+const StyledRightSidePanel = styled("div")`
+  display: flex;
+  align-items: center;
+`;
+const StyledSelector = styled("div")`
+  -webkit-box-align: center;
+  align-items: center;
+  background: ${({ theme }) => theme.cardBg};
+  border: ${({ theme }) => theme.border};
+  border-radius: 16px;
+  color: ${({ theme }) => theme.text};
+  cursor: pointer;
+  display: flex;
+  font-weight: 500;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 8px 12px;
+  /* max-width: 200px; */
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 5px;
+`;
+
 function App() {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -32,27 +66,6 @@ function App() {
 
   const [isConnecting, setIsConnecting] = useState(false);
   const currentChain = window.ethereum.networkVersion;
-
-  useEffect(() => {
-    detectProvider();
-  }, []);
-
-  console.log(window.ethereum.networkVersion, "window.ethereum.networkVersion");
-
-  const chainIds: { [key: number]: string } = {
-    1: "Ethereum",
-    2: "R",
-    3: "Ropsten Testnet",
-  };
-
-  console.log("ccaca ", Object.keys(chainIds[1]));
-
-  const checkConnectedNetwork = () => {
-    if (currentChain != 3) {
-      return `⚠️ You are connected to an unsupported network, Please Switch to Ropsten`;
-    }
-    return;
-  };
 
   const detectProvider = () => {
     let provider;
@@ -65,6 +78,23 @@ function App() {
       window.alert("No Ethereum browser detected! Check out MetaMask");
     }
     return provider;
+  };
+
+  useEffect(() => {
+    detectProvider();
+  });
+
+  const chainIds: { [key: number]: string } = {
+    1: "Ethereum",
+    2: "R",
+    3: "Ropsten Testnet",
+  };
+
+  const checkConnectedNetwork = () => {
+    if (Number(currentChain) !== 3) {
+      return `⚠️ You are connected to an unsupported network, Please Switch to Ropsten`;
+    }
+    return;
   };
 
   const onLoginHandler = async () => {
@@ -110,40 +140,6 @@ function App() {
     <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
   );
 
-  const StyledNav = styled("div")`
-    width: 98%;
-    margin: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  `;
-  const StyledLogo = styled("img")`
-    height: 40px;
-  `;
-  const StyledRightSidePanel = styled("div")`
-    display: flex;
-    align-items: center;
-  `;
-  const StyledSelector = styled("div")`
-    -webkit-box-align: center;
-    align-items: center;
-    background: ${({ theme }) => theme.cardBg};
-    border: ${({ theme }) => theme.border};
-    border-radius: 16px;
-    color: ${({ theme }) => theme.text};
-    cursor: pointer;
-    display: flex;
-    font-weight: 500;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    padding: 8px 12px;
-    /* max-width: 200px; */
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-right: 5px;
-  `;
-
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
       <div className={isDarkTheme ? "light-theme" : "dark-theme"}>
@@ -162,7 +158,7 @@ function App() {
           </StyledRightSidePanel>
         </StyledNav>
 
-        {currentChain == 3 ? (
+        {Number(currentChain) === 3 ? (
           <MyForm
             web3={web3}
             balance={balance}

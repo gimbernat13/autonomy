@@ -45,6 +45,13 @@ const Nav = (props: Props) => {
     return;
   };
 
+  const themeSwitcher = isDarkTheme ? (
+    <div>
+      <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
+    </div>
+  ) : (
+    <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
+  );
   return (
     <StyledNav>
       <StyledLogo

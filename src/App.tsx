@@ -56,13 +56,6 @@ function App() {
     3: "Ropsten Testnet",
   };
 
-  const checkConnectedNetwork = () => {
-    if (Number(currentChain) !== 3) {
-      return `⚠️ You are connected to an unsupported network, Please Switch to Ropsten`;
-    }
-    return;
-  };
-
   const onLoginHandler = async () => {
     const provider = detectProvider();
     if (provider) {
@@ -92,19 +85,10 @@ function App() {
         await web3.eth.getBalance(accounts[0]),
         "ether"
       );
-
       setBalance(Number(accBalanceEth).toFixed(6));
       setIsConnected(true);
     }
   };
-
-  const themeSwitcher = isDarkTheme ? (
-    <div>
-      <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
-    </div>
-  ) : (
-    <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
-  );
 
   return (
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>

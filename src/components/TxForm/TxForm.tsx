@@ -113,7 +113,7 @@ export const MyForm: React.FC<{
                     <Field
                       name="address"
                       as={Input}
-                      placeholder="Recipient"
+                      placeholder="Address"
                       id="address"
                     />
                   </TextInputPanel>

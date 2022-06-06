@@ -6,6 +6,7 @@ import { Moon } from "./components/Moon/Moon";
 import Web3 from "web3";
 import { darkTheme, lightTheme } from "./config/theme";
 import { MyForm } from "./components/TxForm/TxForm";
+import { Card } from "./components/Card/Card";
 
 declare var window: any;
 let provider = window.ethereum;
@@ -48,7 +49,7 @@ function App() {
 
   const checkConnectedNetwork = () => {
     if (currentChain != 3) {
-      return `⚠️ You are connected to ${chainIds[currentChain]}, Please Switch to Ropsten Network`;
+      return `⚠️ You are connected to an unsupported network, Please Switch to Ropsten`;
     }
     return;
   };
@@ -151,27 +152,33 @@ function App() {
             src="https://uploads-ssl.webflow.com/623d3c9e548e1a3b4dc0d912/623d3c9e548e1a4624c0d9e1_autonomy-network-logo-mark-white.svg"
             alt=""
           />
+          <h3 style={{ color: "lightslategrey" }}>{checkConnectedNetwork()}</h3>
+
           <StyledRightSidePanel>
             <StyledSelector> {balance} ETH</StyledSelector>
             <StyledSelector> {chainIds[currentChain]}</StyledSelector>
             <StyledSelector> {currentAccount}</StyledSelector>
             <StyledSelector>{themeSwitcher}</StyledSelector>
           </StyledRightSidePanel>
-
-          {/* <h3>{checkConnectedNetwork()}</h3> */}
         </StyledNav>
 
-        <MyForm
-          web3={web3}
-          balance={balance}
-          selectedAccount={currentAccount}
-          registryContract={registryContract}
-          ethSenderContract={ethSenderContract}
-          isConnected={isConnected}
-          isConnecting={isConnecting}
-          message="Scheduled Transfer"
-          onLoginHandler={onLoginHandler}
-        />
+        {currentChain == 3 ? (
+          <MyForm
+            web3={web3}
+            balance={balance}
+            selectedAccount={currentAccount}
+            registryContract={registryContract}
+            ethSenderContract={ethSenderContract}
+            isConnected={isConnected}
+            isConnecting={isConnecting}
+            message="Scheduled Transfer"
+            onLoginHandler={onLoginHandler}
+          />
+        ) : (
+          <Card>
+            <div>Please use Ropsten Testnet</div>
+          </Card>
+        )}
       </div>
     </ThemeProvider>
   );

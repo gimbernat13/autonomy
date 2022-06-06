@@ -4,6 +4,8 @@ import { Button } from "../Button/Button";
 import { Card } from "../Card/Card";
 import { Input } from "../Input/Input";
 import { DateTimePicker } from "../DateTimePicker/DateTime";
+import { InputPanel } from "../InputPanel/InputPanel";
+import { TextInputPanel } from "../TextInputPanel/TextInputPanel";
 
 export const MyForm: React.FC<{
   message: string;
@@ -85,29 +87,38 @@ export const MyForm: React.FC<{
               <div className="title">
                 <div>{message}</div>
               </div>
-
-              <Field
+              <InputPanel />
+              <TextInputPanel>
+                <Field
+                  name="address"
+                  as={Input}
+                  placeholder="Recipient"
+                  id="address"
+                />
+              </TextInputPanel>
+              <TextInputPanel>
+                <Field
+                  name="dateAndTime"
+                  as={DateTimePicker}
+                  placeholder="Select Date"
+                  id="dateAndTime"
+                />
+              </TextInputPanel>
+              {/* <Field
                 id="address"
                 name="address"
                 as={Input}
                 type="text"
                 placeholder="Wallet Address"
-              />
+              /> */}
 
-              <Field
-                name="dateAndTime"
-                as={DateTimePicker}
-                placeholder="Select Date"
-                id="dateAndTime"
-              />
-
-              <Field
+              {/* <Field
                 id="amount"
                 name="amount"
                 as={Input}
                 type="number"
                 placeholder="Amount of ETH"
-              />
+              /> */}
 
               {isConnected ? (
                 <Button> Send Transaction </Button>

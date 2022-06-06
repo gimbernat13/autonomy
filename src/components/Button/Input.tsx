@@ -48,6 +48,7 @@ export const Input = ({ placeholder, type, onChange, value, id }: Props) => {
     <StyledInputContainer>
       <div className="input-flex-container">
         <StyledInput
+          value={0.0}
           id={id}
           onChange={onChange}
           step="0.01"

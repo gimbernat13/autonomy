@@ -11,22 +11,16 @@ const StyledPicker = styled.input`
   border-radius: 20px;
   width: 100%;
   position: relative;
-  border: ${({ theme }) => theme.border};
-  font-size: 20px;
-  background: ${({ theme }) => theme.inputBg};
+  border: none;
+  font-size: 28px;
   color-scheme: ${({ theme }) => theme.colorScheme};
-  font-size: 18px;
-  font-family: "Roboto Mono", monospace !important;
+  font-size: 26px;
   font-weight: 500;
+  background-color: inherit;
 
   ::-webkit-datetime-edit {
-    padding: 16px;
+    /* padding: 4px; */
   }
-  ::-webkit-datetime-edit-fields-wrapper {
-  }
-  ::-webkit-datetime-edit-text {
-  }
-
   ::-webkit-inner-spin-button {
     display: none;
   }

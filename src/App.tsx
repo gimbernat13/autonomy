@@ -136,8 +136,8 @@ function App() {
     font-weight: 500;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    padding: 6px 8px;
-    max-width: 200px;
+    padding: 8px 12px;
+    /* max-width: 200px; */
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

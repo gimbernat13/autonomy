@@ -32,7 +32,6 @@ const StyledButton = styled.button`
   transform: perspective(1px) translateZ(0px);
   background: ${({ theme }) => theme.buttonBg};
   color: rgb(80, 144, 234);
-  font-family: "Roboto Mono", monospace;
 
   /* background-color: rgb(205, 230, 254); */
   &:hover {

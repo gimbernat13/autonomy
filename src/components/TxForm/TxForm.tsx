@@ -40,7 +40,7 @@ export const MyForm: React.FC<{
         initialValues={{
           amount: 0,
           address: "",
-          dateAndTime: "",
+          dateAndTime: "Execution Date",
         }}
         onSubmit={(values: any, actions: any) => {
           const { dateAndTime, address, amount } = values;

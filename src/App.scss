@@ -3,8 +3,6 @@ body {
   font-family: "Inter custom", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // background-color: rgb(251, 240, 247) !important;
-  // background-color: rgb(44, 47, 54);
 }
 
 .light-theme {
@@ -66,4 +64,9 @@ svg {
 @font-face {
   font-family: "Inter custom";
   src: url("./assets/Inter-roman.var.woff2") format("woff2");
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
 }

@@ -15,13 +15,12 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <div className={theme === "light" ? "light-theme" : "dark-theme"}>
         <Nav theme={theme} themeToggler={themeToggler} />
-        {Number(currentChain) === 3 ? (
-          <TxForm message="Scheduled Transfer" />
-        ) : (
+        {Number(currentChain) !== 3 && (
           <Card>
             <div>Please use Ropsten Testnet</div>
           </Card>
         )}
+        <TxForm message="Scheduled Transfer" />
       </div>
     </ThemeProvider>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.scss";
 import styled from "styled-components";
 import { GLOBAL_THEME } from "../../utils/styleVariables";
 
@@ -18,6 +17,11 @@ const StyledInputContainer = styled.div`
   }
   &.focus {
     border: 1px solid rgb(206, 208, 217);
+  }
+  .input-flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 const StyledInput = styled.input`

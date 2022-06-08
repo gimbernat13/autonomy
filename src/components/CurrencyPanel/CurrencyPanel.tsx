@@ -38,10 +38,8 @@ const StyledBottomPanelText = styled.div`
   align-items: center;
 `;
 const StyledMaxButton = styled.div`
-  background-color: rgba(21, 61, 111, 0.44);
   border: none;
   border-radius: 12px;
-  color: rgb(33, 114, 229);
   font-size: 11px;
   font-weight: 500;
   margin-left: 0.25rem;
@@ -49,6 +47,8 @@ const StyledMaxButton = styled.div`
   padding: 4px 6px;
   pointer-events: initial;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.maxBg};
+  color: ${({ theme }) => theme.maxColor};
 `;
 
 export const CurrencyPanel = ({ balance, value, handleMaxInput }: Props) => {

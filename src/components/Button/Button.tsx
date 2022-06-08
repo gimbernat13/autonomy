@@ -15,7 +15,6 @@ const StyledButton = styled.button`
   text-align: center;
   border-radius: 20px;
   outline: none;
-  /* border: 1px solid rgb(237, 238, 242); */
   border: none;
   text-decoration: none;
   display: flex;
@@ -32,16 +31,7 @@ const StyledButton = styled.button`
   transform: perspective(1px) translateZ(0px);
   background: ${({ theme }) => theme.buttonBg};
   color: rgb(80, 144, 234);
-  &:disabled,
-  &[disabled] {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-    cursor: default;
-    filter: blur(1px);
-  }
 
-  /* background-color: rgb(205, 230, 254); */
   &:hover {
     filter: brightness(1.05);
   }

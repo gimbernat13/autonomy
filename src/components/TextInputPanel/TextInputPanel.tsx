@@ -4,7 +4,7 @@ import styled from "styled-components";
 type Props = {
   children: any;
 };
-const StyledInputPanel = styled.div`
+const StyledTextPanel = styled.div`
   border-radius: 20px;
   border: 1px solid rgb(25, 27, 31);
   border: ${({ theme }) => theme.border};
@@ -17,5 +17,5 @@ const StyledInputPanel = styled.div`
 `;
 
 export const TextInputPanel = ({ children }: Props) => {
-  return <StyledInputPanel>{children}</StyledInputPanel>;
+  return <StyledTextPanel>{children}</StyledTextPanel>;
 };

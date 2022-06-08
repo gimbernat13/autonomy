@@ -3,37 +3,37 @@ import { Formik, Form, Field } from "formik";
 import { Card } from "../Card/Card";
 import { Input } from "../Input/Input";
 import { DateTimePicker } from "../DateTimePicker/DateTime";
-import { InputPanel } from "../InputPanel/InputPanel";
-import { TextInputPanel } from "../TextInputPanel/TextInputPanel";
+import { CurrencyPanel } from "../CurrencyPanel/CurrencyPanel";
 import { Button } from "../Button/Button";
-
-export const MyForm: React.FC<{
-  balance: number;
+import { useWeb3 } from "../../utils/hooks/useWeb3";
+import { TextInputPanel } from "../TextInputPanel/TextInputPanel";
+export const TxForm: React.FC<{
   message: string;
-  isConnected: boolean;
-  isConnecting: boolean;
-  onLoginHandler: () => void;
-  ethSenderContract: any;
-  registryContract: any;
-  selectedAccount: string;
-  web3: any;
-}> = ({
-  isConnected,
-  isConnecting,
-  onLoginHandler,
-  message,
-  ethSenderContract,
-  registryContract,
-  selectedAccount,
-  balance,
-  web3,
-}) => {
+}> = ({ message }) => {
+  const {
+    web3,
+    balance,
+    currentAccount,
+    isConnected,
+    isConnecting,
+    onLoginHandler,
+  } = useWeb3();
+
   const toTimestamp = (input: string) => {
     var timestamp = new Date(input).getTime();
     return timestamp;
   };
   const ethSenderAddress = "0xfa0a8b60b2af537dec9832f72fd233e93e4c8463";
-  console.log(typeof web3);
+  const registryAddress = "0x3C901dc595105934D61DB70C2170D3a6834Cb8B7";
+
+  const ETHSENDER_ABI = require("../../config/ABI/ethSenderAbi.json");
+  const REGISTRY_ABI = require("../../config/ABI/registryAbi.json");
+
+  const ethSenderContract = new web3.eth.Contract(
+    ETHSENDER_ABI,
+    ethSenderAddress
+  );
+  const registryContract = new web3.eth.Contract(REGISTRY_ABI, registryAddress);
 
   return (
     <div>
@@ -56,14 +56,13 @@ export const MyForm: React.FC<{
             verifyUser: false,
             insertFeeAmount: false,
             payWithAUTO: false,
-            isAlive: false,
           };
 
           const callReg = async () => {
             const response = await registryContract.methods
               .newReq(...Object.values(parsedValues))
               .send({
-                from: selectedAccount,
+                from: currentAccount,
                 value: amountToWei,
               });
             return response;
@@ -84,7 +83,7 @@ export const MyForm: React.FC<{
                   <div className="title">
                     <div>{message}</div>
                   </div>
-                  <InputPanel
+                  <CurrencyPanel
                     handleMaxInput={handleMaxInput}
                     balance={balance}
                     value={values.amount}

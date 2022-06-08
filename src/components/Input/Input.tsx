@@ -1,8 +1,6 @@
 import React from "react";
 import "./index.scss";
 import styled from "styled-components";
-// FIXME : USE HOOK TO HANDLE DARK MODE
-// import { useDarkMode } from "../../utils/hooks/useDarkmode";
 import { GLOBAL_THEME } from "../../utils/styleVariables";
 
 type Props = {

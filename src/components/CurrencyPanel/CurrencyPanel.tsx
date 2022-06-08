@@ -8,7 +8,7 @@ type Props = {
   handleMaxInput: any;
   value: any;
 };
-const StyledInputPanel = styled.div`
+const StyledCurrencyPanel = styled.div`
   border-radius: 20px;
   background: ${({ theme }) => theme.inputBg};
   width: initial;
@@ -51,9 +51,9 @@ const StyledMaxButton = styled.div`
   cursor: pointer;
 `;
 
-export const InputPanel = ({ balance, value, handleMaxInput }: Props) => {
+export const CurrencyPanel = ({ balance, value, handleMaxInput }: Props) => {
   return (
-    <StyledInputPanel>
+    <StyledCurrencyPanel>
       <StyledTopPanel>
         <Field
           name="amount"
@@ -71,6 +71,6 @@ export const InputPanel = ({ balance, value, handleMaxInput }: Props) => {
           <StyledMaxButton onClick={handleMaxInput}>MAX</StyledMaxButton>
         </StyledBottomPanelText>
       </StyledBottomPanel>
-    </StyledInputPanel>
+    </StyledCurrencyPanel>
   );
 };

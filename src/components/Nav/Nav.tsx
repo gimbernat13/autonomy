@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useWeb3 } from "../../utils/hooks/useWeb3";
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 
-type Props = {};
+type Props = {
+  // FIXME: Avoid prop drilling w/ hook Fix
+  theme: string | null;
+  themeToggler: () => void;
+};
 
 const StyledNav = styled("div")`
-  width: 98%;
-  margin: 10px;
+  width: 100%;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,41 +36,34 @@ const StyledSelector = styled("div")`
   -webkit-box-pack: justify;
   justify-content: space-between;
   padding: 8px 12px;
-  /* max-width: 200px; */
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-right: 5px;
 `;
 
-const Nav = (props: Props) => {
-  const checkConnectedNetwork = () => {
-    if (Number(currentChain) !== 3) {
-      return `⚠️ You are connected to an unsupported network, Please Switch to Ropsten`;
-    }
-    return;
+export const Nav = ({ theme, themeToggler }: Props) => {
+  const chainIds: { [key: number]: string } = {
+    1: "Ethereum",
+    2: "Rinkeby",
+    3: "Ropsten Testnet",
   };
 
-  const themeSwitcher = isDarkTheme ? (
-    <div>
-      <Moon clicked={() => setIsDarkTheme(!isDarkTheme)} />
-    </div>
-  ) : (
-    <LightBulb clicked={() => setIsDarkTheme(!isDarkTheme)} />
-  );
+  const { balance, currentAccount, currentChain } = useWeb3();
+
   return (
     <StyledNav>
       <StyledLogo
         src="https://uploads-ssl.webflow.com/623d3c9e548e1a3b4dc0d912/623d3c9e548e1a4624c0d9e1_autonomy-network-logo-mark-white.svg"
         alt=""
       />
-      <h3 style={{ color: "lightslategrey" }}>{checkConnectedNetwork()}</h3>
-
       <StyledRightSidePanel>
         <StyledSelector> {balance} ETH</StyledSelector>
         <StyledSelector> {chainIds[currentChain]}</StyledSelector>
         <StyledSelector> {currentAccount}</StyledSelector>
-        <StyledSelector>{themeSwitcher}</StyledSelector>
+        <StyledSelector>
+          <ThemeSwitcher theme={theme} themeToggler={themeToggler} />
+        </StyledSelector>
       </StyledRightSidePanel>
     </StyledNav>
   );

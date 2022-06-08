@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 export const useDarkMode = () => {
-  const [theme, setTheme] = useState("light");
+  // FIXME: Fix local storage issue, and Fix Prop Drilling
+  const localTheme = window.localStorage.getItem("theme");
+  const [theme, setTheme] = useState(localTheme);
 
   const setMode = (mode: string) => {
     window.localStorage.setItem("theme", mode);
@@ -8,12 +10,13 @@ export const useDarkMode = () => {
   };
 
   const themeToggler = () => {
-    theme === "light" ? setMode("dark") : setMode("light");
+    console.log(theme);
+    localTheme === "light" ? setMode("dark") : setMode("light");
   };
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
     localTheme && setTheme(localTheme);
-  }, []);
-  return [theme, themeToggler];
+  }, [theme]);
+  return { theme, themeToggler };
 };

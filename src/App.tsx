@@ -3,7 +3,6 @@ import "./App.scss";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./config/theme";
 import { TxForm } from "./components/TxForm/TxForm";
-import { Card } from "./components/Card/Card";
 import { useWeb3 } from "./utils/hooks/useWeb3";
 import { Nav } from "./components/Nav/Nav";
 import { useDarkMode } from "./utils/hooks/useDarkmode";
